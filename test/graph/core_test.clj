@@ -5,8 +5,8 @@
 (deftest arrays-of-2d
   (testing "Incrementing the array"
     (let [empty-array []]
-      (is (= [[false]] (increment-2d-array empty-array)))
-      (is (= [[false false] [false false]] (increment-2d-array (increment-2d-array empty-array)))))))
+      (is (= [[nil]] (increment-2d-array empty-array)))
+      (is (= [[nil nil] [nil nil]] (increment-2d-array (increment-2d-array empty-array)))))))
 
 (deftest creating-graphs
   (testing "Can create a graph"
@@ -44,3 +44,15 @@
       (is (not (edge? g :c :c))))))
 
 ;; neighbours
+
+(deftest finding-neighbours
+  (testing "can determine neighbours in a simple graph"
+    (let [g (-> (new-graph)
+                (add-node :a)
+                (add-node :b)
+                (add-node :c)
+                (add-edge :a :b)
+                (add-edge :a :c))]
+      (is (= [:b :c] (neighbours g :a)))
+      (is (= [:a] (neighbours g :b)))
+      (is (= [:a] (neighbours g :c))))))

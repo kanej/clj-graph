@@ -2,8 +2,8 @@
 
 (defn increment-2d-array [a]
   (let [arrity (count a)
-        extend-existing-rows (vec (map #(conj % false) a))
-        append-new-row (conj extend-existing-rows (vec (repeat (inc arrity) false)))]
+        extend-existing-rows (vec (map #(conj % nil) a))
+        append-new-row (conj extend-existing-rows (vec (repeat (inc arrity) nil)))]
     append-new-row))
 
 (defn new-graph []
@@ -20,11 +20,16 @@
   (let [from-node-index (get-in g [:nodes from-node])
         to-node-index   (get-in g [:nodes to-node])]
     (-> g 
-      (assoc-in [:edges from-node-index to-node-index] true)
-      (assoc-in [:edges to-node-index from-node-index] true)))) 
+      (assoc-in [:edges from-node-index to-node-index] to-node)
+      (assoc-in [:edges to-node-index from-node-index] from-node)))) 
 
 (defn edge? [g from-node to-node]
   (and (get-in g [:nodes from-node])
        (get-in g [:nodes to-node])
        (get-in g [:edges (get-in g [:nodes from-node]) (get-in g [:nodes to-node])])))
 
+(defn neighbours [g v]
+  (let [node-index (get-in g [:nodes v])
+        row (get-in g [:edges node-index])
+        neighbours (keep-indexed #(if %2 %2) row)]
+    neighbours))
