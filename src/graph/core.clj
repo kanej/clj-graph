@@ -9,7 +9,7 @@
         append-new-row (conj extend-existing-rows (vec (repeat (inc arrity) nil)))]
     append-new-row))
 
-(defn new-graph []
+(defn graph []
   {:nodes {} :edges []})
 
 (defn add-node [g node]

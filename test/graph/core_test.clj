@@ -10,14 +10,14 @@
 
 (deftest creating-graphs
   (testing "Can create a graph"
-    (is (not (nil? (new-graph))))
-    (is (zero? (count (:nodes (new-graph))))))
+    (is (not (nil? (graph))))
+    (is (zero? (count (:nodes (graph))))))
   (testing "Can add a a node"
-    (let [g (new-graph)]
+    (let [g (graph)]
       (is (= {:a 0} (:nodes (add-node g :a))))
       (is (= {:a 0 :b 1} (:nodes (add-node (add-node g :a) :b))))))
   (testing "can query for an edge"
-    (let [g (-> (new-graph)
+    (let [g (-> (graph)
                 (add-node :a)
                 (add-node :b))]
       (is (not (edge? g :a :b)))
@@ -25,7 +25,7 @@
       (is (not (edge? g :a :non-existant)))
       (is (not (edge? g :b :a)))
       (is (edge? (add-edge g :a :b) :a :b)))
-    (let [g (-> (new-graph)
+    (let [g (-> (graph)
                 (add-node :a)
                 (add-node :b)
                 (add-node :c)
@@ -47,7 +47,7 @@
 
 (deftest finding-neighbours
   (testing "can determine neighbours in a simple graph"
-    (let [g (-> (new-graph)
+    (let [g (-> (graph)
                 (add-node :a)
                 (add-node :b)
                 (add-node :c)
