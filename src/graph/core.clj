@@ -1,4 +1,7 @@
-(ns graph.core)
+(ns 
+  ^{:author "John Kane"
+    :doc "Graph data structure"}
+  graph.core)
 
 (defn increment-2d-array [a]
   (let [arrity (count a)
