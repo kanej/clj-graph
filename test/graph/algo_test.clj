@@ -29,4 +29,22 @@
                                  (add-edge :b :c))]
       (is (= [:a :b :c] (depth-first-search three-vertex-graph :a)))
       (is (= [:c :b :a] (depth-first-search three-vertex-graph :c)))
-      (is (= [:b :a :c] (depth-first-search three-vertex-graph :b))))))
+      (is (= [:b :a :c] (depth-first-search three-vertex-graph :b)))))
+  (testing "Search on interconnected four vertex graph"
+    ;; a <-> b <-> c
+    ;;       ^     ^
+    ;;       |     |
+    ;;       V     V
+    ;;       d <-> e
+    (let [interconnect-graph (-> (graph)
+                                 (add-node :a)
+                                 (add-node :b)
+                                 (add-node :c)
+                                 (add-node :d)
+                                 (add-node :e)
+                                 (add-edge :a :b)
+                                 (add-edge :b :c)
+                                 (add-edge :b :d)
+                                 (add-edge :c :e)
+                                 (add-edge :d :e))]
+      (is (= [:a :b :c :e :d] (depth-first-search interconnect-graph :a))))))
