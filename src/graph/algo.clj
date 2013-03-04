@@ -7,17 +7,22 @@
 
 (defn depth-first-search 
   ([graph]
-    (let [v (first (keys (:nodes graph)))]
-      (if (nil? v)
+    (let [vertex (first (keys (:nodes graph)))]
+      (if (nil? vertex)
         [] 
-        (depth-first-search graph v))))
+        (depth-first-search graph vertex))))
   ([graph start-vertex] 
-    (let [next-vertexes []
-          vertex-state (apply hash-map (mapcat #(vector % :white) (keys (:nodes g)))) 
+    (let [next-vertexes [start-vertex]
+          vertex-state (apply hash-map (mapcat #(vector % :white) (keys (:nodes graph)))) 
           walk []]
-      (depth-first-search graph start-vertex vertex-state next-vertexes walk)))
-  ([graph start-vertex vertex-state next-vertexes walk]
-    (let [white-neighbours (unseen-neighbours graph start-vertex vertex-state)] 
-          (if (empty? white-neighbours)
-            (conj walk start-vertex)
-            (concat [start-vertex] white-neighbours)))))
+      (depth-first-search graph vertex-state next-vertexes walk)))
+  ([graph vertex-state next-vertexes walk]
+    (if (empty? next-vertexes)
+      walk
+      (let [current-vertex (first next-vertexes)
+            updated-walk (conj walk current-vertex)
+            next-vertexes (rest next-vertexes)
+            updated-vertex-state (assoc vertex-state current-vertex :gray)
+            white-neighbours (unseen-neighbours graph current-vertex updated-vertex-state)
+            next-vertexes (concat white-neighbours next-vertexes)] 
+        (recur graph updated-vertex-state next-vertexes updated-walk)))))

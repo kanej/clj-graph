@@ -1,7 +1,7 @@
 (ns graph.algo-test
-  (:use clojure.test
-        graph.algo
-        graph.core))
+  (:use clojure.test)
+  (:use [graph.algo] :reload) 
+  (:use [graph.core] :reload))
 
 (deftest depth-first-searching
   (testing "Search on the empty graph"
@@ -12,9 +12,21 @@
       (is (= [:a] (depth-first-search single-vertex-graph)))
       (is (= [:a] (depth-first-search single-vertex-graph :a)))))
   (testing "Search on connected two vertex graph"
+    ;; a <-> b
     (let [two-vertex-graph (-> (graph)
                                (add-node :a)
                                (add-node :b)
                                (add-edge :a :b))]
       (is (= [:a :b] (depth-first-search two-vertex-graph :a)))
-      (is (= [:b :a] (depth-first-search two-vertex-graph :b))))))
+      (is (= [:b :a] (depth-first-search two-vertex-graph :b)))))
+  (testing "Search on connected three vertex line graph"
+    ;; a <-> b <-> c
+    (let [three-vertex-graph (-> (graph)
+                                 (add-node :a)
+                                 (add-node :b)
+                                 (add-node :c)
+                                 (add-edge :a :b)
+                                 (add-edge :b :c))]
+      (is (= [:a :b :c] (depth-first-search three-vertex-graph :a)))
+      (is (= [:c :b :a] (depth-first-search three-vertex-graph :c)))
+      (is (= [:b :a :c] (depth-first-search three-vertex-graph :b))))))
