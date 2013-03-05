@@ -11,16 +11,16 @@
 (deftest creating-graphs
   (testing "Can create a graph"
     (is (not (nil? (graph))))
-    (is (zero? (count (:nodes (graph))))))
-  (testing "Can add a a node"
+    (is (zero? (count (:vertexes (graph))))))
+  (testing "Can add a a vertex"
     (let [g (graph)]
-      (is (= {:a 0} (:nodes (add-node g :a))))
-      (is (= {:a 0 :b 1} (:nodes (add-node (add-node g :a) :b))))))
+      (is (= {:a 0} (:vertexes (add-vertex g :a))))
+      (is (= {:a 0 :b 1} (:vertexes (add-vertex (add-vertex g :a) :b))))))
   (testing "can query for an edge"
 
     (let [g (-> (graph)
-                (add-node :a)
-                (add-node :b))]
+                (add-vertex :a)
+                (add-vertex :b))]
       ;; There are no edges until an edge is added 
       (is (not (edge? g :a :b)))
       (is (not (edge? g :b :a)))
@@ -31,9 +31,9 @@
       (is (edge? (add-edge g :a :b) :a :b)))
 
     (let [g (-> (graph)
-                (add-node :a)
-                (add-node :b)
-                (add-node :c)
+                (add-vertex :a)
+                (add-vertex :b)
+                (add-vertex :c)
                 (add-edge :a :b))] 
 
       ;; Correctly detects the expected edges
@@ -49,7 +49,7 @@
       (is (not (edge? g :b :c)))
       (is (not (edge? g :c :b)))
 
-      ;; There should be no edges from a node
+      ;; There should be no edges from a vertex
       ;; to itself
       (is (not (edge? g :a :a)))
       (is (not (edge? g :b :b)))
@@ -60,9 +60,9 @@
 (deftest finding-neighbours
   (testing "can determine neighbours in a simple graph"
     (let [g (-> (graph)
-                (add-node :a)
-                (add-node :b)
-                (add-node :c)
+                (add-vertex :a)
+                (add-vertex :b)
+                (add-vertex :c)
                 (add-edge :a :b)
                 (add-edge :a :c))]
       (is (= [:b :c] (neighbours g :a)))

@@ -8,23 +8,23 @@
     (let [empty-graph (graph)]
       (is (empty? (depth-first-search empty-graph)))))
   (testing "Search on single vertex graph"
-    (let [single-vertex-graph (add-node (graph) :a)]
+    (let [single-vertex-graph (add-vertex (graph) :a)]
       (is (= [:a] (depth-first-search single-vertex-graph)))
       (is (= [:a] (depth-first-search single-vertex-graph :a)))))
   (testing "Search on connected two vertex graph"
     ;; a <-> b
     (let [two-vertex-graph (-> (graph)
-                               (add-node :a)
-                               (add-node :b)
+                               (add-vertex :a)
+                               (add-vertex :b)
                                (add-edge :a :b))]
       (is (= [:a :b] (depth-first-search two-vertex-graph :a)))
       (is (= [:b :a] (depth-first-search two-vertex-graph :b)))))
   (testing "Search on connected three vertex line graph"
     ;; a <-> b <-> c
     (let [three-vertex-graph (-> (graph)
-                                 (add-node :a)
-                                 (add-node :b)
-                                 (add-node :c)
+                                 (add-vertex :a)
+                                 (add-vertex :b)
+                                 (add-vertex :c)
                                  (add-edge :a :b)
                                  (add-edge :b :c))]
       (is (= [:a :b :c] (depth-first-search three-vertex-graph :a)))
@@ -37,11 +37,11 @@
     ;;       V     V
     ;;       d <-> e
     (let [interconnect-graph (-> (graph)
-                                 (add-node :a)
-                                 (add-node :b)
-                                 (add-node :c)
-                                 (add-node :d)
-                                 (add-node :e)
+                                 (add-vertex :a)
+                                 (add-vertex :b)
+                                 (add-vertex :c)
+                                 (add-vertex :d)
+                                 (add-vertex :e)
                                  (add-edge :a :b)
                                  (add-edge :b :c)
                                  (add-edge :b :d)

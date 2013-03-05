@@ -11,13 +11,13 @@
    Currently it only finds the vertexes in the connected
    graph starting at the given vertex."
   ([graph]
-    (let [vertex (first (keys (:nodes graph)))]
+    (let [vertex (first (keys (:vertexes graph)))]
       (if (nil? vertex)
         [] 
         (depth-first-search graph vertex))))
   ([graph start-vertex] 
     (let [next-vertexes [start-vertex]
-          vertex-state (apply hash-map (mapcat #(vector % :white) (keys (:nodes graph)))) 
+          vertex-state (apply hash-map (mapcat #(vector % :white) (keys (:vertexes graph)))) 
           walk []]
       (depth-first-search graph vertex-state next-vertexes walk)))
   ([graph vertex-state next-vertexes walk]

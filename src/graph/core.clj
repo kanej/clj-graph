@@ -10,29 +10,29 @@
     append-new-row))
 
 (defn graph []
-  {:nodes {} :edges []})
+  {:vertexes {} :edges []})
 
-(defn add-node [g node]
-  (let [old-nodes (:nodes g)
-        new-nodes (assoc old-nodes node (count old-nodes))
+(defn add-vertex [g vertex]
+  (let [old-vertexes (:vertexes g)
+        new-vertexes (assoc old-vertexes vertex (count old-vertexes))
         old-edges (:edges g)
         new-edges (increment-2d-array old-edges)]
-    {:nodes new-nodes :edges new-edges}))
+    {:vertexes new-vertexes :edges new-edges}))
 
-(defn add-edge [g from-node to-node]
-  (let [from-node-index (get-in g [:nodes from-node])
-        to-node-index   (get-in g [:nodes to-node])]
+(defn add-edge [g from-vertex to-vertex]
+  (let [from-vertex-index (get-in g [:vertexes from-vertex])
+        to-vertex-index   (get-in g [:vertexes to-vertex])]
     (-> g 
-      (assoc-in [:edges from-node-index to-node-index] to-node)
-      (assoc-in [:edges to-node-index from-node-index] from-node)))) 
+      (assoc-in [:edges from-vertex-index to-vertex-index] to-vertex)
+      (assoc-in [:edges to-vertex-index from-vertex-index] from-vertex)))) 
 
-(defn edge? [g from-node to-node]
-  (and (get-in g [:nodes from-node])
-       (get-in g [:nodes to-node])
-       (get-in g [:edges (get-in g [:nodes from-node]) (get-in g [:nodes to-node])])))
+(defn edge? [g from-vertex to-vertex]
+  (and (get-in g [:vertexes from-vertex])
+       (get-in g [:vertexes to-vertex])
+       (get-in g [:edges (get-in g [:vertexes from-vertex]) (get-in g [:vertexes to-vertex])])))
 
 (defn neighbours [g v]
-  (let [node-index (get-in g [:nodes v])
-        row (get-in g [:edges node-index])
+  (let [vertex-index (get-in g [:vertexes v])
+        row (get-in g [:edges vertex-index])
         neighbours (keep-indexed #(if %2 %2) row)]
     neighbours))
