@@ -5,8 +5,8 @@
 (deftest arrays-of-2d
   (testing "Incrementing the array"
     (let [empty-array []]
-      (is (= [[nil]] (increment-2d-array empty-array)))
-      (is (= [[nil nil] [nil nil]] (increment-2d-array (increment-2d-array empty-array)))))))
+      (is (= [[nil]] (increment-edge-matrix empty-array)))
+      (is (= [[nil nil] [nil nil]] (increment-edge-matrix (increment-edge-matrix empty-array)))))))
 
 (deftest creating-graphs
   (testing "Can create a graph"
