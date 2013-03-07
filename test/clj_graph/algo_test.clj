@@ -1,7 +1,7 @@
-(ns graph.algo-test
+(ns clj-graph.algo-test
   (:use clojure.test)
-  (:use [graph.algo] :reload) 
-  (:use [graph.core] :reload))
+  (:use [clj-graph.algo] :reload) 
+  (:use [clj-graph.core] :reload))
 
 (deftest depth-first-searching
   (testing "Search on the empty graph"

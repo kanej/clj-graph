@@ -1,7 +1,7 @@
 (ns 
   ^{:author "John Kane"
     :doc "Graph data structure"}
-  graph.core)
+  clj-graph.core)
 
 (defn increment-2d-array [a]
   (let [arrity (count a)

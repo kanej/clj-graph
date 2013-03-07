@@ -1,6 +1,6 @@
-(ns graph.core-test
+(ns clj-graph.core-test
   (:use clojure.test)
-  (:use [graph.core] :reload))
+  (:use [clj-graph.core] :reload))
 
 (deftest arrays-of-2d
   (testing "Incrementing the array"

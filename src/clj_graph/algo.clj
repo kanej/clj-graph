@@ -1,7 +1,7 @@
-(ns graph.algo
+(ns clj-graph.algo
   ^{:author "John Kane"
     :description "Text book graph algorithms."}
-  (:use graph.core))
+  (:use clj-graph.core))
 
 (declare unseen-neighbours)
 
