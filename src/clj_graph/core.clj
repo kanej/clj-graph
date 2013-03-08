@@ -43,8 +43,8 @@
 (defn edge-matrix []
   [])
 
-(defn increment-edge-matrix [a]
-  (let [arrity (count a)
-        extend-existing-rows (vec (map #(conj % nil) a))
+(defn increment-edge-matrix [matrix]
+  (let [arrity (count matrix)
+        extend-existing-rows (vec (map #(conj % nil) matrix))
         append-new-row (conj extend-existing-rows (vec (repeat (inc arrity) nil)))]
     append-new-row))
