@@ -35,5 +35,5 @@
 (defn neighbours [{:keys [vertexes edges]} from-vertex]
   (let [vertex-index (from-vertex vertexes) 
         row (get edges vertex-index) 
-        neighbours (into [] (remove nil? row))]
+        neighbours (vec (remove nil? row))]
     neighbours))
