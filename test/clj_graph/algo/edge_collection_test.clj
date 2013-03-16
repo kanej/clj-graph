@@ -1,7 +1,7 @@
-(ns clj-graph.algo.edge-matrix-test
+(ns clj-graph.algo.edge-collection-test
   (:refer-clojure :exclude [inc])
   (:use clojure.test)
-  (:use [clj-graph.algo.edge-matrix] :reload))
+  (:use [clj-graph.algo.edge-collection] :reload))
 
 (deftest edge-matrixes 
   (testing "Incrementing the matrix"

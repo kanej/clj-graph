@@ -1,13 +1,13 @@
-(ns clj-graph.algo.edge-matrix
+(ns clj-graph.algo.edge-collection
   (:refer-clojure :exclude [inc]))
 
-(defprotocol IEdgeMatrix
+(defprotocol EdgeCollection
   "A matrix for representing edge connections in a graph."
   (inc [em] "Increase the size of the matrix by one.")
   (lookup [em x y] "What is the value at index co-ordinate [x y]?")
   (update [em x y value] "Set the value at index co-ordinate [x y] to value."))
 
-(extend-protocol IEdgeMatrix
+(extend-protocol EdgeCollection
   clojure.lang.IPersistentVector
   (inc [this] 
     (let [arrity (count this)

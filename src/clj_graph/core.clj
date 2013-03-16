@@ -3,14 +3,14 @@
     :doc "Graph data structures"}
   clj-graph.core
   (:refer-clojure :exclude [inc])
-  (:require [clj-graph.algo.edge-matrix :as em]))
+  (:require [clj-graph.algo.edge-collection :as ec]))
 
 (defn graph []
-  {:vertexes {} :edges (em/edge-matrix)})
+  {:vertexes {} :edges (ec/edge-matrix)})
 
 (defn add-vertex [{:keys [vertexes edges] :as graph} vertex]
   (let [new-vertexes (assoc vertexes vertex (count vertexes))
-        new-edges (em/inc edges)]
+        new-edges (ec/inc edges)]
     (-> graph
         (assoc :vertexes new-vertexes)
         (assoc :edges new-edges))))
@@ -19,8 +19,8 @@
   (let [from-index (from-vertex vertexes)
         to-index   (to-vertex vertexes)
         updated-edges (-> edges
-                          (em/update from-index to-index to-vertex)
-                          (em/update to-index from-index from-vertex))]
+                          (ec/update from-index to-index to-vertex)
+                          (ec/update to-index from-index from-vertex))]
     (assoc graph :edges updated-edges))) 
 
 (defn edge? [{:keys [vertexes edges] :as graph} from-vertex to-vertex]
@@ -30,7 +30,7 @@
     ; The given to vertex exists
     (to-vertex vertexes)
     ; There is an edge within the matrix
-    (em/lookup edges (from-vertex vertexes) (to-vertex vertexes))))
+    (ec/lookup edges (from-vertex vertexes) (to-vertex vertexes))))
 
 (defn neighbours [{:keys [vertexes edges]} from-vertex]
   (let [vertex-index (from-vertex vertexes) 
