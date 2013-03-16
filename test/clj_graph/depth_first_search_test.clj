@@ -28,7 +28,7 @@
 ;;       |     |
 ;;       V     V
 ;;       d <-> e
-(def interconnect-graph 
+(def interconnected-graph 
   (-> (graph)
       (add-vertex :a)
       (add-vertex :b)
@@ -55,4 +55,8 @@
     (is (= [:c :b :a] (depth-first-search three-vertex-graph :c)))
     (is (= [:b :a :c] (depth-first-search three-vertex-graph :b))))
   (testing "Search on interconnected four vertex graph"
-    (is (= [:a :b :c :e :d] (depth-first-search interconnect-graph :a)))))
+    (is (= [:a :b :c :e :d] (depth-first-search interconnected-graph :a)))))
+
+(comment (deftest breadth-first-searching
+  (testing "Search on the empty graph"
+    (is (empty? (breadth-first-search empty-graph)))))) 
