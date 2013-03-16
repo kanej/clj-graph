@@ -40,13 +40,29 @@
           walk []]
       (traversal graph vertex-state vertex-queue walk)))) 
 
-(defn- choose-vertex [graph]
+;; TODO Is this really indicative of traversals really needing
+;; a given starting vertex?
+(defn- choose-vertex 
+  "Choose a vertex from the given graph, the first as it so happens."
+  [graph]
   (first (keys (:vertexes graph))))
 
-(defn- initialise-vertex-state-from [graph]
+(defn- initialise-vertex-state-from 
+  "Creates a Vertex State map given a graph. All vertexes
+   are initally coloured white."
+  [graph]
   (apply hash-map (mapcat #(vector % :white) (keys (:vertexes graph)))))
 
-(defn- traversal 
+(defn- traversal
+  "Performa a traversal of the given graph, returning an ordered
+   array of the vertexes encountered in the walk. Only vertexes
+   connected to vertexes in the vertex queue will be reached
+   by this traversal.
+  
+   The type of traversal is controlled by the vertex queue,
+   a FIFO queue for depth first traversal and a FILO queue
+   for breadth first traversal. Any vertex queue must
+   conform to the VertexQueue protocol."
   [graph vertex-state vertex-queue walk]
   (if (empty? vertex-queue)
     walk
