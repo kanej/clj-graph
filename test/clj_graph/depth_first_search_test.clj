@@ -57,6 +57,18 @@
   (testing "Search on interconnected four vertex graph"
     (is (= [:a :b :c :e :d] (depth-first-search interconnected-graph :a)))))
 
-(comment (deftest breadth-first-searching
+(deftest breadth-first-searching
   (testing "Search on the empty graph"
-    (is (empty? (breadth-first-search empty-graph)))))) 
+    (is (empty? (breadth-first-search empty-graph))))
+  (testing "Search on single vertex graph"
+    (is (= [:a] (breadth-first-search single-vertex-graph)))
+    (is (= [:a] (breadth-first-search single-vertex-graph :a))))
+  (testing "Search on connected two vertex graph"
+    (is (= [:a :b] (breadth-first-search two-vertex-graph :a)))
+    (is (= [:b :a] (breadth-first-search two-vertex-graph :b))))
+  (testing "Search on connected three vertex line graph"
+    (is (= [:a :b :c] (breadth-first-search three-vertex-graph :a)))
+    (is (= [:c :b :a] (breadth-first-search three-vertex-graph :c)))
+    (is (= [:b :a :c] (breadth-first-search three-vertex-graph :b))))
+  (testing "Search on interconnected four vertex graph"
+    (is (= [:a :b :c :d :e] (breadth-first-search interconnected-graph :a)))))
