@@ -21,10 +21,10 @@
         [] 
         (depth-first-search graph vertex))))
   ([graph start-vertex] 
-    (let [next-vertexes (conj [] start-vertex)
-          vertex-state (initialise-vertex-state-from graph) 
+    (let [vertex-state (initialise-vertex-state-from graph) 
+          vertex-queue (conj [] start-vertex)
           walk []]
-      (traversal graph vertex-state next-vertexes walk)))) 
+      (traversal graph vertex-state vertex-queue walk)))) 
 
 (defn breadth-first-search 
   "Performs a breadth first traversal on the given graph, reaching the 
@@ -35,10 +35,10 @@
         [] 
         (breadth-first-search graph vertex))))
   ([graph start-vertex] 
-    (let [next-vertexes (conj clojure.lang.PersistentQueue/EMPTY start-vertex) 
-          vertex-state (initialise-vertex-state-from graph) 
+    (let [vertex-state (initialise-vertex-state-from graph) 
+          vertex-queue (conj clojure.lang.PersistentQueue/EMPTY start-vertex) 
           walk []]
-      (traversal graph vertex-state next-vertexes walk)))) 
+      (traversal graph vertex-state vertex-queue walk)))) 
 
 (defn- choose-vertex [graph]
   (first (keys (:vertexes graph))))
@@ -47,26 +47,26 @@
   (apply hash-map (mapcat #(vector % :white) (keys (:vertexes graph)))))
 
 (defn- traversal 
-  [graph vertex-state next-vertexes walk]
-  (if (empty? next-vertexes)
+  [graph vertex-state vertex-queue walk]
+  (if (empty? vertex-queue)
     walk
     (let [;; Pull the first vertex from the queue,
           ;; creating a new smaller queue in the process
-          [next-vertexes-excluding-current current-vertex] (vq/dequeue next-vertexes)
+          [vertex-queue-excluding-current current-vertex] (vq/dequeue vertex-queue)
 
           ;; Add the current vertex to the walk, as we are processing it
           updated-walk (conj walk current-vertex)
 
           ;; Push the unseen neighbours onto the next vertexes list
           white-neighbours (unseen-neighbours graph current-vertex vertex-state)
-          updated-vertexes (vq/enqueue next-vertexes-excluding-current white-neighbours)
+          updated-vertex-queue (vq/enqueue vertex-queue-excluding-current white-neighbours)
 
           ;; Update the vertex state marking the current vertex as black
           ;; and the neighbours as seen i.e. grey
           updated-vertex-state (-> vertex-state 
                                    (mark-vertex-colour [current-vertex] :black)
                                    (mark-vertex-colour white-neighbours :grey))] 
-      (recur graph updated-vertex-state updated-vertexes updated-walk))))
+      (recur graph updated-vertex-state updated-vertex-queue updated-walk))))
 
 (defn- mark-vertex-colour 
   "Return the vertex state map after updating each of the given vertexes
