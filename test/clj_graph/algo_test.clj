@@ -1,4 +1,4 @@
-(ns clj-graph.depth-first-search-test
+(ns clj-graph.algo-test
   (:use clojure.test)
   (:use [clj-graph.algo] :reload) 
   (:use [clj-graph.core] :reload))
