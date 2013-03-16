@@ -15,6 +15,6 @@
 (extend-protocol VertexQueue
   clojure.lang.PersistentQueue
   (enqueue [this vertexes]
-    (reduce #(conj %1 %2) this vertexes))
+    (reduce conj this vertexes))
   (dequeue [this]
     [(pop this) (peek this)]))
