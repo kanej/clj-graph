@@ -1,8 +1,8 @@
-(ns clj-graph.algo
+(ns clj-graph.algo.traversal
   ^{:author "John Kane"
     :description "Text book graph algorithms."}
   (:require [clj-graph.core :as g])
-  (:require [clj-graph.vertex-queue :as vq]))
+  (:require [clj-graph.algo.vertex-queue :as vq]))
 
 (declare choose-vertex)
 (declare initialise-vertex-state-from)

@@ -1,4 +1,4 @@
-(ns clj-graph.edge-matrix
+(ns clj-graph.algo.edge-matrix
   (:refer-clojure :exclude [inc]))
 
 (defprotocol IEdgeMatrix

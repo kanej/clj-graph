@@ -2,7 +2,7 @@ TODOs
 =====
 
 - [*] Look again at signatures of depth and breadth first search
-- [ ] Move the algorithms and protocols into their own folder
+- [*] Move the algorithms and protocols into their own folder
 - [ ] Tests around the Vertex Queue protocol stuff
 - [ ] Rename the Edge Matrix protocol
 - [ ] Adjacency List implementation of graph

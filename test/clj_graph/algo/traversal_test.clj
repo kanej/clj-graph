@@ -1,6 +1,6 @@
-(ns clj-graph.algo-test
+(ns clj-graph.algo.traversal-test
   (:use clojure.test)
-  (:use [clj-graph.algo] :reload) 
+  (:use [clj-graph.algo.traversal] :reload) 
   (:use [clj-graph.core] :reload))
 
 (def empty-graph (graph))

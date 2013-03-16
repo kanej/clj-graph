@@ -1,4 +1,4 @@
-(ns clj-graph.vertex-queue)
+(ns clj-graph.algo.vertex-queue)
 
 (defprotocol VertexQueue
   "A queue for storing vertexes"

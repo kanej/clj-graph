@@ -3,7 +3,7 @@
     :doc "Graph data structures"}
   clj-graph.core
   (:refer-clojure :exclude [inc])
-  (:require [clj-graph.edge-matrix :as em]))
+  (:require [clj-graph.algo.edge-matrix :as em]))
 
 (defn graph []
   {:vertexes {} :edges (em/edge-matrix)})
