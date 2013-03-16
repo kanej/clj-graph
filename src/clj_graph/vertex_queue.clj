@@ -18,3 +18,9 @@
     (reduce conj this vertexes))
   (dequeue [this]
     [(pop this) (peek this)]))
+
+(def ^{:doc "First in first out empty queue implementing the VertexQueue protocol."}
+  FIFO clojure.lang.PersistentVector/EMPTY)
+
+(def ^{:doc "First in last out empty queue implementing the VertexQueue protocol."}
+  FILO clojure.lang.PersistentQueue/EMPTY)

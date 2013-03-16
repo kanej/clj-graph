@@ -43,9 +43,8 @@
 
 (deftest depth-first-searching
   (testing "Search on the empty graph"
-    (is (empty? (depth-first-search empty-graph))))
+    (is (empty? (depth-first-search empty-graph :nonexistant))))
   (testing "Search on single vertex graph"
-    (is (= [:a] (depth-first-search single-vertex-graph)))
     (is (= [:a] (depth-first-search single-vertex-graph :a))))
   (testing "Search on connected two vertex graph"
     (is (= [:a :b] (depth-first-search two-vertex-graph :a)))
@@ -59,9 +58,8 @@
 
 (deftest breadth-first-searching
   (testing "Search on the empty graph"
-    (is (empty? (breadth-first-search empty-graph))))
+    (is (empty? (breadth-first-search empty-graph :nonexistant))))
   (testing "Search on single vertex graph"
-    (is (= [:a] (breadth-first-search single-vertex-graph)))
     (is (= [:a] (breadth-first-search single-vertex-graph :a))))
   (testing "Search on connected two vertex graph"
     (is (= [:a :b] (breadth-first-search two-vertex-graph :a)))
